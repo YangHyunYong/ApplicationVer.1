@@ -32,19 +32,7 @@ public class AsyncActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_async);
-        Button btn = (Button)findViewById(R.id.httpTest);
-        tvData = (TextView)findViewById(R.id.textView);
         new JSONTask().execute("http://18.222.157.222:3306/location");
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),GPSActivity.class);
-                intent.putExtra("lat",lat);
-                intent.putExtra("lon",lon);
-                startActivity(intent);
-            }
-        });
-
     }
     public class JSONTask extends AsyncTask<String, String, String> {
         @Override
@@ -118,7 +106,11 @@ public class AsyncActivity extends AppCompatActivity {
                         longtitudeList.add(jsonObject.getString("lon"));
                         lat = latitudeList.get(latitudeList.size() - 1);
                         lon = longtitudeList.get(longtitudeList.size() - 1);
-                        tvData.setText("" + lat + "\n" + "" + lon);
+
+                        Intent intent = new Intent(getApplicationContext(),GPSActivity.class);
+                        intent.putExtra("lat",lat);
+                        intent.putExtra("lon",lon);
+                        startActivity(intent);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
