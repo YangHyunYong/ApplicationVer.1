@@ -32,7 +32,7 @@ public class AsyncActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_async);
-        new JSONTask().execute("http://18.222.157.222:3306/location");
+        new JSONTask().execute("IP주소");
     }
     public class JSONTask extends AsyncTask<String, String, String> {
         @Override
